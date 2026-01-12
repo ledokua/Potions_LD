@@ -1,6 +1,7 @@
 package net.ledok.potions_ld.registry;
 
 import net.ledok.potions_ld.PotionsLdMod;
+import net.ledok.potions_ld.items.CauldronUpgradeItem;
 import net.ledok.potions_ld.items.PercentageHealItem;
 import net.ledok.potions_ld.items.VitalityHerbItem;
 import net.ledok.potions_ld.items.VitalitySeedItem;
@@ -13,7 +14,7 @@ import net.minecraft.world.item.Item;
 public class ItemRegistry {
     // HEALING POTIONS
     public static final Item HEALING_POTION_1 = ItemInit.register(
-            new PercentageHealItem(new Item.Properties().stacksTo(8), 0.1f, 20, 100, 30, true),
+            new PercentageHealItem(new Item.Properties().stacksTo(8), 0.1f, 20, 160, 50, true),
             "healing_potion_1"
     );
     public static final Item HEALING_POTION_2 = ItemInit.register(
@@ -82,6 +83,20 @@ public class ItemRegistry {
     public static final Item VITALITY_SEED_5 = ItemInit.register(
             new VitalityHerbItem(new Item.Properties()),
             "vitality_seed_5"
+    );
+
+    // Upgrades
+    public static final Item SPEED_UPGRADE = ItemInit.register(
+            new CauldronUpgradeItem(new Item.Properties().stacksTo(1)),
+            "speed_upgrade"
+    );
+    public static final Item EFFICIENCY_UPGRADE = ItemInit.register(
+            new CauldronUpgradeItem(new Item.Properties().stacksTo(1)),
+            "efficiency_upgrade"
+    );
+    public static final Item FORTUNE_UPGRADE = ItemInit.register(
+            new CauldronUpgradeItem(new Item.Properties().stacksTo(1)),
+            "fortune_upgrade"
     );
 
     public static class ItemInit {

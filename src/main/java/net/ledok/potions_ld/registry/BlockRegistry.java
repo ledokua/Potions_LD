@@ -1,7 +1,7 @@
 package net.ledok.potions_ld.registry;
 
 import net.ledok.potions_ld.PotionsLdMod;
-import net.ledok.potions_ld.blocks.VitalityBushBlock;
+import net.ledok.potions_ld.blocks.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -12,36 +12,35 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BlockRegistry {
 
+    public static final Block POTION_CAULDRON = registerBlock("potion_cauldron",
+            new PotionCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
+
     // Tier 1 Crop
     public static final Block VITALITY_BUSH_1 = registerBlockWithoutItem("vitality_bush_1",
-            new VitalityBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH),
+            new VitalityBushBlockT1(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH),
                     () -> ItemRegistry.VITALITY_HERB_1,
-                    () -> ItemRegistry.VITALITY_SEED_2,
-                    3 // Max Age
+                    () -> ItemRegistry.VITALITY_SEED_2
             ));
 
     // Tier 2 Crop
     public static final Block VITALITY_BUSH_2 = registerBlockWithoutItem("vitality_bush_2",
-            new VitalityBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH),
+            new VitalityBushBlockT2(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH),
                     () -> ItemRegistry.VITALITY_HERB_2,
-                    () -> ItemRegistry.VITALITY_SEED_3,
-                    4 // Max Age
+                    () -> ItemRegistry.VITALITY_SEED_3
             ));
 
     // Tier 3 Crop
     public static final Block VITALITY_BUSH_3 = registerBlockWithoutItem("vitality_bush_3",
-            new VitalityBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH),
+            new VitalityBushBlockT3(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH),
                     () -> ItemRegistry.VITALITY_HERB_3,
-                    () -> ItemRegistry.VITALITY_SEED_4,
-                    5 // Max Age
+                    () -> ItemRegistry.VITALITY_SEED_4
             ));
 
     // Tier 4 Crop
     public static final Block VITALITY_BUSH_4 = registerBlockWithoutItem("vitality_bush_4",
-            new VitalityBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH),
+            new VitalityBushBlockT4(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH),
                     () -> ItemRegistry.VITALITY_HERB_4,
-                    () -> ItemRegistry.VITALITY_SEED_5, // Placeholder
-                    6 // Max Age
+                    () -> ItemRegistry.VITALITY_SEED_5
             ));
 
     private static Block registerBlockWithoutItem(String name, Block block) {
