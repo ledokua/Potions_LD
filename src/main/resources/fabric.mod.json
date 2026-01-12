@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "potions_ld",
+  "version": "${version}",
+  "name": "Potions_LD",
+  "description": "Mod that adds admin utilities for creating dungeons/raids",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/potions_ld/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "net.ledok.potions_ld.client.Potions_ldDataGenerator"
+    ],
+    "client": [
+      "net.ledok.potions_ld.client.Potions_ldClient"
+    ],
+    "main": [
+      "net.ledok.potions_ld.PotionsLdMod"
+    ]
+  },
+  "mixins": [
+    "potions_ld.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

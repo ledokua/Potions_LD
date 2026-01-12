@@ -1,0 +1,30 @@
+{
+  "message.potions_ld.healing_potion_used": "You feel rejuvenated!",
+  
+  "item.potions_ld.healing_potion_1": "Minor Healing Potion",
+  "item.potions_ld.healing_potion_2": "Standard Healing Potion",
+  "item.potions_ld.healing_potion_3": "Greater Healing Potion",
+  "item.potions_ld.healing_potion_4": "Superior Healing Potion",
+  "item.potions_ld.healing_potion_5": "Grand Healing Potion",
+  "item.potions_ld.healing_potion_6": "Potion of Total Restoration",
+
+  "item.potions_ld.vitality_seed_1": "Tier 1 Vitality Seed",
+  "item.potions_ld.vitality_herb_1": "Tier 1 Vitality Herb",
+  "item.potions_ld.vitality_seed_2": "Tier 2 Vitality Seed",
+  "item.potions_ld.vitality_herb_2": "Tier 2 Vitality Herb",
+  "item.potions_ld.vitality_seed_3": "Tier 3 Vitality Seed",
+  "item.potions_ld.vitality_herb_3": "Tier 3 Vitality Herb",
+  "item.potions_ld.vitality_seed_4": "Tier 4 Vitality Seed",
+  "item.potions_ld.vitality_herb_4": "Tier 4 Vitality Herb",
+
+  "item.potions_ld.healing_potion.tooltip.reset_scroll": "Resets your skill tree (You don't loose points)",
+  "item.potions_ld.healing_potion.tooltip.dripstone": "Creates pointed dripstone above random player",
+  "item.potions_ld.healing_potion.tooltip": "Heals for: %1$s\nUse Time: %2$s seconds\nCooldown: %3$s seconds",
+  "item.potions_ld.healing_potion.tooltip.heal": "Heals for: %1$s",
+  "item.potions_ld.healing_potion.tooltip.use_time": "Use Time: %1$s seconds",
+  "item.potions_ld.healing_potion.tooltip.sickness": "Sickness: %1$s seconds",
+
+  "itemGroup.potions_ld.potions_ld_group": "Potions LD",
+  "effect.potions_ld.potion_sickness": "Potion Sickness",
+  "effect.potions_ld.potion_sickness.description": "Reduces healing from potions by 5% per level."
+}
