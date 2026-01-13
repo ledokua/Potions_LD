@@ -16,6 +16,7 @@ public class Potions_ldClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.VITALITY_BUSH_2, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.VITALITY_BUSH_3, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.VITALITY_BUSH_4, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.VITALITY_BUSH_5, RenderType.cutout());
 
         MenuScreens.register(ScreenHandlerTypeRegistry.POTION_CAULDRON, PotionCauldronScreen::new);
     }

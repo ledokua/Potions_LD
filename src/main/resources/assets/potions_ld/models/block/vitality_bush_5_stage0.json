@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "potions_ld:block/vitality_bush_5_stage0"
+  }
+}

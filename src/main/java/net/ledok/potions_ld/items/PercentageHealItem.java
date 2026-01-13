@@ -115,7 +115,6 @@ public class PercentageHealItem extends Item {
 
         // Prepare the placeholder values
         String healAmount = (int)(this.healPercentage * 100) + "%";
-        // Use Locale.ROOT to ensure dot is used as decimal separator
         String useTime = String.format(Locale.ROOT, "%.1f", this.useTimeTicks / 20.0f);
         String sicknessTime = String.format(Locale.ROOT, "%.1f", this.sicknessTicks / 20.0f);
 

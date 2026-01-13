@@ -16,6 +16,15 @@
   "item.potions_ld.vitality_herb_3": "Tier 3 Vitality Herb",
   "item.potions_ld.vitality_seed_4": "Tier 4 Vitality Seed",
   "item.potions_ld.vitality_herb_4": "Tier 4 Vitality Herb",
+  "item.potions_ld.vitality_seed_5": "Tier 5 Vitality Seed",
+  "item.potions_ld.vitality_herb_5": "Tier 5 Vitality Herb",
+
+  "item.potions_ld.speed_upgrade": "Speed Upgrade",
+  "item.potions_ld.speed_upgrade.tooltip": "Reduces production time by 30%",
+  "item.potions_ld.efficiency_upgrade": "Efficiency Upgrade",
+  "item.potions_ld.efficiency_upgrade.tooltip": "Reduces material consumption by 50%",
+  "item.potions_ld.fortune_upgrade": "Fortune Upgrade",
+  "item.potions_ld.fortune_upgrade.tooltip": "10% chance for extra output",
 
   "item.potions_ld.healing_potion.tooltip.reset_scroll": "Resets your skill tree (You don't loose points)",
   "item.potions_ld.healing_potion.tooltip.dripstone": "Creates pointed dripstone above random player",

@@ -43,6 +43,13 @@ public class BlockRegistry {
                     () -> ItemRegistry.VITALITY_SEED_5
             ));
 
+    // Tier 5 Crop
+    public static final Block VITALITY_BUSH_5 = registerBlockWithoutItem("vitality_bush_5",
+            new VitalityBushBlockT5(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH),
+                    () -> ItemRegistry.VITALITY_HERB_5,
+                    () -> null // No next tier seed
+            ));
+
     private static Block registerBlockWithoutItem(String name, Block block) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(PotionsLdMod.MOD_ID, name);
         return Registry.register(BuiltInRegistries.BLOCK, id, block);

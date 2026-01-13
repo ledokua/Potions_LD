@@ -24,6 +24,10 @@ public class ItemGroupRegistry {
                         entries.accept(ItemRegistry.HEALING_POTION_4);
                         entries.accept(ItemRegistry.HEALING_POTION_5);
                         entries.accept(ItemRegistry.HEALING_POTION_6);
+                        
+                        // Crafting stations
+                        entries.accept(BlockRegistry.POTION_CAULDRON);
+
                         // Farming
                         entries.accept(ItemRegistry.VITALITY_SEED_1);
                         entries.accept(ItemRegistry.VITALITY_HERB_1);
@@ -33,6 +37,13 @@ public class ItemGroupRegistry {
                         entries.accept(ItemRegistry.VITALITY_HERB_3);
                         entries.accept(ItemRegistry.VITALITY_SEED_4);
                         entries.accept(ItemRegistry.VITALITY_HERB_4);
+                        entries.accept(ItemRegistry.VITALITY_SEED_5);
+                        entries.accept(ItemRegistry.VITALITY_HERB_5);
+
+                        // Upgrades
+                        entries.accept(ItemRegistry.SPEED_UPGRADE);
+                        entries.accept(ItemRegistry.EFFICIENCY_UPGRADE);
+                        entries.accept(ItemRegistry.FORTUNE_UPGRADE);
                     })
                     .build()
     );

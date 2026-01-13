@@ -79,10 +79,14 @@ public class ItemRegistry {
             "vitality_herb_4"
     );
 
-    // Tier 5 (Placeholder)
+    // Tier 5
     public static final Item VITALITY_SEED_5 = ItemInit.register(
-            new VitalityHerbItem(new Item.Properties()),
+            new VitalitySeedItem(BlockRegistry.VITALITY_BUSH_5, new Item.Properties()),
             "vitality_seed_5"
+    );
+    public static final Item VITALITY_HERB_5 = ItemInit.register(
+            new VitalityHerbItem(new Item.Properties()),
+            "vitality_herb_5"
     );
 
     // Upgrades

@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "age=0": { "model": "potions_ld:block/vitality_bush_5_stage0" },
+    "age=1": { "model": "potions_ld:block/vitality_bush_5_stage1" },
+    "age=2": { "model": "potions_ld:block/vitality_bush_5_stage2" },
+    "age=3": { "model": "potions_ld:block/vitality_bush_5_stage3" },
+    "age=4": { "model": "potions_ld:block/vitality_bush_5_stage4" },
+    "age=5": { "model": "potions_ld:block/vitality_bush_5_stage5" },
+    "age=6": { "model": "potions_ld:block/vitality_bush_5_stage6" },
+    "age=7": { "model": "potions_ld:block/vitality_bush_5_stage7" }
+  }
+}
