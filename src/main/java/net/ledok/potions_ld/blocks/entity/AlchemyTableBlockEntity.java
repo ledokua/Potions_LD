@@ -1,11 +1,12 @@
 package net.ledok.potions_ld.blocks.entity;
 
-import net.ledok.potions_ld.items.CauldronUpgradeItem;
+import net.ledok.potions_ld.blocks.AlchemyTableBlock;
+import net.ledok.potions_ld.items.StationUpgradeItem;
 import net.ledok.potions_ld.registry.ItemRegistry;
 import net.ledok.potions_ld.recipe.CountedIngredient;
 import net.ledok.potions_ld.recipe.PotionBrewingRecipe;
 import net.ledok.potions_ld.recipe.PotionBrewingRecipeType;
-import net.ledok.potions_ld.screen.PotionCauldronScreenHandler;
+import net.ledok.potions_ld.screen.AlchemyTableScreenHandler;
 import net.ledok.potions_ld.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory {
+public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(8, ItemStack.EMPTY);
     private static final int INPUT_SLOT_1 = 0;
     private static final int INPUT_SLOT_2 = 1;
@@ -46,14 +47,14 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
     private int maxProgress = 100;
     private RecipeHolder<PotionBrewingRecipe> activeRecipe = null;
 
-    public PotionCauldronBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityTypeRegistry.POTION_CAULDRON, pos, state);
+    public AlchemyTableBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockEntityTypeRegistry.ALCHEMY_TABLE, pos, state);
         this.data = new ContainerData() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> PotionCauldronBlockEntity.this.progress;
-                    case 1 -> PotionCauldronBlockEntity.this.maxProgress;
+                    case 0 -> AlchemyTableBlockEntity.this.progress;
+                    case 1 -> AlchemyTableBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -61,8 +62,8 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> PotionCauldronBlockEntity.this.progress = value;
-                    case 1 -> PotionCauldronBlockEntity.this.maxProgress = value;
+                    case 0 -> AlchemyTableBlockEntity.this.progress = value;
+                    case 1 -> AlchemyTableBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -71,6 +72,30 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
                 return 2;
             }
         };
+    }
+
+    @Override
+    public void setChanged() {
+        updateBlockState();
+        super.setChanged();
+    }
+
+    private void updateBlockState() {
+        if (level != null && !level.isClientSide) {
+            BlockState currentState = getBlockState();
+            boolean hasSpeed = hasUpgrade(ItemRegistry.SPEED_UPGRADE);
+            boolean hasEfficiency = hasUpgrade(ItemRegistry.EFFICIENCY_UPGRADE);
+            boolean hasFortune = hasUpgrade(ItemRegistry.FORTUNE_UPGRADE);
+
+            BlockState newState = currentState
+                    .setValue(AlchemyTableBlock.HAS_SPEED_UPGRADE, hasSpeed)
+                    .setValue(AlchemyTableBlock.HAS_EFFICIENCY_UPGRADE, hasEfficiency)
+                    .setValue(AlchemyTableBlock.HAS_FORTUNE_UPGRADE, hasFortune);
+
+            if (currentState != newState) {
+                level.setBlock(worldPosition, newState, 3);
+            }
+        }
     }
 
     @Override
@@ -90,7 +115,7 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
         } else if (slot == OUTPUT_SLOT) {
             return false;
         } else if (slot >= UPGRADE_SLOT_1 && slot <= UPGRADE_SLOT_3) {
-            return stack.getItem() instanceof CauldronUpgradeItem && !hasUpgrade(stack.getItem());
+            return stack.getItem() instanceof StationUpgradeItem && !hasUpgrade(stack.getItem());
         }
         return false;
     }
@@ -106,22 +131,22 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
 
     @Override
     public @NotNull Component getDisplayName() {
-        return Component.translatable("block.potions_ld.potion_cauldron");
+        return Component.translatable("block.potions_ld.alchemy_table");
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory playerInventory, Player player) {
-        return new PotionCauldronScreenHandler(syncId, playerInventory, this, this.data);
+        return new AlchemyTableScreenHandler(syncId, playerInventory, this, this.data);
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         ContainerHelper.saveAllItems(tag, inventory, registries);
-        tag.putInt("potion_cauldron.progress", progress);
+        tag.putInt("alchemy_table.progress", progress);
         if (activeRecipe != null) {
-            tag.putString("potion_cauldron.active_recipe", activeRecipe.id().toString());
+            tag.putString("alchemy_table.active_recipe", activeRecipe.id().toString());
         }
     }
 
@@ -130,9 +155,9 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         ContainerHelper.loadAllItems(tag, inventory, registries);
-        progress = tag.getInt("potion_cauldron.progress");
-        if (tag.contains("potion_cauldron.active_recipe") && this.level != null) {
-            ResourceLocation recipeId = ResourceLocation.parse(tag.getString("potion_cauldron.active_recipe"));
+        progress = tag.getInt("alchemy_table.progress");
+        if (tag.contains("alchemy_table.active_recipe") && this.level != null) {
+            ResourceLocation recipeId = ResourceLocation.parse(tag.getString("alchemy_table.active_recipe"));
             this.level.getRecipeManager().byKey(recipeId).ifPresent(recipe -> {
                 if (recipe.value() instanceof PotionBrewingRecipe) {
                     this.activeRecipe = (RecipeHolder<PotionBrewingRecipe>) recipe;
@@ -141,7 +166,7 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
         }
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, PotionCauldronBlockEntity entity) {
+    public static void tick(Level level, BlockPos pos, BlockState state, AlchemyTableBlockEntity entity) {
         if (level == null || level.isClientSide) {
             return;
         }
@@ -180,7 +205,7 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
         this.activeRecipe = null;
     }
 
-    private static Optional<RecipeHolder<PotionBrewingRecipe>> findRecipe(PotionCauldronBlockEntity entity) {
+    private static Optional<RecipeHolder<PotionBrewingRecipe>> findRecipe(AlchemyTableBlockEntity entity) {
         if (entity.level == null) return Optional.empty();
         for (RecipeHolder<PotionBrewingRecipe> recipeHolder : entity.level.getRecipeManager().getAllRecipesFor(PotionBrewingRecipeType.INSTANCE)) {
             if (matches(recipeHolder.value(), entity)) {
@@ -190,7 +215,7 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
         return Optional.empty();
     }
     
-    private static boolean matches(PotionBrewingRecipe recipe, PotionCauldronBlockEntity entity) {
+    private static boolean matches(PotionBrewingRecipe recipe, AlchemyTableBlockEntity entity) {
         NonNullList<ItemStack> availableItems = NonNullList.create();
         for (int i = INPUT_SLOT_1; i <= INPUT_SLOT_4; i++) {
             availableItems.add(entity.getItem(i).copy());
@@ -222,7 +247,7 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
         return true;
     }
 
-    private static boolean canCraft(PotionCauldronBlockEntity entity, RecipeHolder<PotionBrewingRecipe> recipe) {
+    private static boolean canCraft(AlchemyTableBlockEntity entity, RecipeHolder<PotionBrewingRecipe> recipe) {
         if (entity.level == null) return false;
         ItemStack resultItem = recipe.value().getResultItem(entity.level.registryAccess());
         if (resultItem.isEmpty()) return false;
@@ -235,7 +260,7 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
         return outputStack.getCount() + resultItem.getCount() <= outputStack.getMaxStackSize();
     }
 
-    private static void consumeIngredients(PotionCauldronBlockEntity entity, RecipeHolder<PotionBrewingRecipe> recipe) {
+    private static void consumeIngredients(AlchemyTableBlockEntity entity, RecipeHolder<PotionBrewingRecipe> recipe) {
         for (CountedIngredient countedIngredient : recipe.value().ingredients()) {
             int ingredientCost = countedIngredient.count();
             if (entity.hasUpgrade(ItemRegistry.EFFICIENCY_UPGRADE)) {
@@ -256,7 +281,7 @@ public class PotionCauldronBlockEntity extends BlockEntity implements MenuProvid
         }
     }
 
-    private static void craftItem(PotionCauldronBlockEntity entity, RecipeHolder<PotionBrewingRecipe> recipe) {
+    private static void craftItem(AlchemyTableBlockEntity entity, RecipeHolder<PotionBrewingRecipe> recipe) {
         if (entity.level == null) return;
         ItemStack resultItem = recipe.value().getResultItem(entity.level.registryAccess());
         int outputAmount = resultItem.getCount();

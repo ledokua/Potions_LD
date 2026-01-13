@@ -8,8 +8,8 @@ import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 
-public class CauldronUpgradeItem extends Item {
-    public CauldronUpgradeItem(Properties properties) {
+public class StationUpgradeItem extends Item {
+    public StationUpgradeItem(Properties properties) {
         super(properties);
     }
 

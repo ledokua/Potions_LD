@@ -8,13 +8,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 
 public class ScreenHandlerTypeRegistry {
-    public static MenuType<PotionCauldronScreenHandler> POTION_CAULDRON;
+    public static MenuType<AlchemyTableScreenHandler> ALCHEMY_TABLE;
 
     public static void initialize() {
-        POTION_CAULDRON = Registry.register(
+        ALCHEMY_TABLE = Registry.register(
                 BuiltInRegistries.MENU,
-                ResourceLocation.fromNamespaceAndPath(PotionsLdMod.MOD_ID, "potion_cauldron"),
-                new MenuType<>(PotionCauldronScreenHandler::new, net.minecraft.world.flag.FeatureFlagSet.of())
+                ResourceLocation.fromNamespaceAndPath(PotionsLdMod.MOD_ID, "alchemy_table"),
+                new MenuType<>(AlchemyTableScreenHandler::new, net.minecraft.world.flag.FeatureFlagSet.of())
         );
     }
 }

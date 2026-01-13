@@ -26,7 +26,7 @@ public class ItemGroupRegistry {
                         entries.accept(ItemRegistry.HEALING_POTION_6);
                         
                         // Crafting stations
-                        entries.accept(BlockRegistry.POTION_CAULDRON);
+                        entries.accept(BlockRegistry.ALCHEMY_TABLE);
 
                         // Farming
                         entries.accept(ItemRegistry.VITALITY_SEED_1);

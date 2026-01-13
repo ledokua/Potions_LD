@@ -2,7 +2,7 @@ package net.ledok.potions_ld.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.ledok.potions_ld.PotionsLdMod;
-import net.ledok.potions_ld.screen.PotionCauldronScreenHandler;
+import net.ledok.potions_ld.screen.AlchemyTableScreenHandler;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -10,10 +10,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class PotionCauldronScreen extends AbstractContainerScreen<PotionCauldronScreenHandler> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(PotionsLdMod.MOD_ID, "textures/gui/potion_cauldron.png");
+public class AlchemyTableScreen extends AbstractContainerScreen<AlchemyTableScreenHandler> {
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(PotionsLdMod.MOD_ID, "textures/gui/alchemy_table.png");
 
-    public PotionCauldronScreen(PotionCauldronScreenHandler handler, Inventory inventory, Component title) {
+    public AlchemyTableScreen(AlchemyTableScreenHandler handler, Inventory inventory, Component title) {
         super(handler, inventory, title);
     }
 

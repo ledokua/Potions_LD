@@ -1,6 +1,6 @@
 package net.ledok.potions_ld.screen;
 
-import net.ledok.potions_ld.items.CauldronUpgradeItem;
+import net.ledok.potions_ld.items.StationUpgradeItem;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,7 +11,7 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class PotionCauldronScreenHandler extends AbstractContainerMenu {
+public class AlchemyTableScreenHandler extends AbstractContainerMenu {
     private final Container inventory;
     private final ContainerData data;
     
@@ -21,12 +21,12 @@ public class PotionCauldronScreenHandler extends AbstractContainerMenu {
     private static final int UPGRADE_START = 5;
     private static final int UPGRADE_END = 7;
 
-    public PotionCauldronScreenHandler(int syncId, Inventory playerInventory) {
+    public AlchemyTableScreenHandler(int syncId, Inventory playerInventory) {
         this(syncId, playerInventory, new SimpleContainer(8), new SimpleContainerData(2));
     }
 
-    public PotionCauldronScreenHandler(int syncId, Inventory playerInventory, Container inventory, ContainerData data) {
-        super(ScreenHandlerTypeRegistry.POTION_CAULDRON, syncId);
+    public AlchemyTableScreenHandler(int syncId, Inventory playerInventory, Container inventory, ContainerData data) {
+        super(ScreenHandlerTypeRegistry.ALCHEMY_TABLE, syncId);
         checkContainerSize(inventory, 8);
         this.inventory = inventory;
         this.data = data;
@@ -51,19 +51,19 @@ public class PotionCauldronScreenHandler extends AbstractContainerMenu {
         this.addSlot(new Slot(inventory, 5, 152, 11) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() instanceof CauldronUpgradeItem;
+                return stack.getItem() instanceof StationUpgradeItem;
             }
         });
         this.addSlot(new Slot(inventory, 6, 152, 31) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() instanceof CauldronUpgradeItem;
+                return stack.getItem() instanceof StationUpgradeItem;
             }
         });
         this.addSlot(new Slot(inventory, 7, 152, 51) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() instanceof CauldronUpgradeItem;
+                return stack.getItem() instanceof StationUpgradeItem;
             }
         });
 
@@ -86,7 +86,7 @@ public class PotionCauldronScreenHandler extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int progressArrowSize = 25; // Changed to 25 as requested
+        int progressArrowSize = 25;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -104,7 +104,7 @@ public class PotionCauldronScreenHandler extends AbstractContainerMenu {
                 }
             } else {
                 // From player inventory to machine
-                if (originalStack.getItem() instanceof CauldronUpgradeItem) {
+                if (originalStack.getItem() instanceof StationUpgradeItem) {
                     if (!this.moveItemStackTo(originalStack, UPGRADE_START, UPGRADE_END + 1, false)) {
                         return ItemStack.EMPTY;
                     }

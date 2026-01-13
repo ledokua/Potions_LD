@@ -2,7 +2,7 @@ package net.ledok.potions_ld.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.ledok.potions_ld.client.screen.PotionCauldronScreen;
+import net.ledok.potions_ld.client.screen.AlchemyTableScreen;
 import net.ledok.potions_ld.registry.BlockRegistry;
 import net.ledok.potions_ld.screen.ScreenHandlerTypeRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -18,6 +18,6 @@ public class Potions_ldClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.VITALITY_BUSH_4, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.VITALITY_BUSH_5, RenderType.cutout());
 
-        MenuScreens.register(ScreenHandlerTypeRegistry.POTION_CAULDRON, PotionCauldronScreen::new);
+        MenuScreens.register(ScreenHandlerTypeRegistry.ALCHEMY_TABLE, AlchemyTableScreen::new);
     }
 }

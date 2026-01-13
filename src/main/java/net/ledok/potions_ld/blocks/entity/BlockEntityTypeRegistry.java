@@ -8,13 +8,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class BlockEntityTypeRegistry {
-    public static BlockEntityType<PotionCauldronBlockEntity> POTION_CAULDRON;
+    public static BlockEntityType<AlchemyTableBlockEntity> ALCHEMY_TABLE;
 
     public static void initialize() {
-        POTION_CAULDRON = Registry.register(
+        ALCHEMY_TABLE = Registry.register(
                 BuiltInRegistries.BLOCK_ENTITY_TYPE,
-                ResourceLocation.fromNamespaceAndPath(PotionsLdMod.MOD_ID, "potion_cauldron"),
-                BlockEntityType.Builder.of(PotionCauldronBlockEntity::new, BlockRegistry.POTION_CAULDRON).build(null)
+                ResourceLocation.fromNamespaceAndPath(PotionsLdMod.MOD_ID, "alchemy_table"),
+                BlockEntityType.Builder.of(AlchemyTableBlockEntity::new, BlockRegistry.ALCHEMY_TABLE).build(null)
         );
     }
 }

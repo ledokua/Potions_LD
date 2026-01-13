@@ -1,0 +1,21 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "potions_ld:block/upgrade_efficiency",
+    "texture": "potions_ld:block/upgrade_efficiency"
+  },
+  "elements": [
+    {
+      "from": [ 4, 16, 7 ],
+      "to": [ 6, 18, 9 ],
+      "faces": {
+        "down":  { "texture": "#texture", "cullface": "down" },
+        "up":    { "texture": "#texture", "cullface": "up" },
+        "north": { "texture": "#texture" },
+        "south": { "texture": "#texture" },
+        "west":  { "texture": "#texture" },
+        "east":  { "texture": "#texture" }
+      }
+    }
+  ]
+}

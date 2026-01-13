@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BlockRegistry {
 
-    public static final Block POTION_CAULDRON = registerBlock("potion_cauldron",
-            new PotionCauldronBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
+    public static final Block ALCHEMY_TABLE = registerBlock("alchemy_table",
+            new AlchemyTableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
 
     // Tier 1 Crop
     public static final Block VITALITY_BUSH_1 = registerBlockWithoutItem("vitality_bush_1",

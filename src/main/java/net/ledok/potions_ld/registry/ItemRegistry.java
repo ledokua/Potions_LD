@@ -1,7 +1,7 @@
 package net.ledok.potions_ld.registry;
 
 import net.ledok.potions_ld.PotionsLdMod;
-import net.ledok.potions_ld.items.CauldronUpgradeItem;
+import net.ledok.potions_ld.items.StationUpgradeItem;
 import net.ledok.potions_ld.items.PercentageHealItem;
 import net.ledok.potions_ld.items.VitalityHerbItem;
 import net.ledok.potions_ld.items.VitalitySeedItem;
@@ -91,15 +91,15 @@ public class ItemRegistry {
 
     // Upgrades
     public static final Item SPEED_UPGRADE = ItemInit.register(
-            new CauldronUpgradeItem(new Item.Properties().stacksTo(1)),
+            new StationUpgradeItem(new Item.Properties().stacksTo(1)),
             "speed_upgrade"
     );
     public static final Item EFFICIENCY_UPGRADE = ItemInit.register(
-            new CauldronUpgradeItem(new Item.Properties().stacksTo(1)),
+            new StationUpgradeItem(new Item.Properties().stacksTo(1)),
             "efficiency_upgrade"
     );
     public static final Item FORTUNE_UPGRADE = ItemInit.register(
-            new CauldronUpgradeItem(new Item.Properties().stacksTo(1)),
+            new StationUpgradeItem(new Item.Properties().stacksTo(1)),
             "fortune_upgrade"
     );
 

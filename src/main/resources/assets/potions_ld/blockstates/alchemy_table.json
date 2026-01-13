@@ -1,0 +1,84 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north", "type": "left" },
+      "apply": { "model": "potions_ld:block/alchemy_table_left" }
+    },
+    {
+      "when": { "facing": "east", "type": "left" },
+      "apply": { "model": "potions_ld:block/alchemy_table_left", "y": 90 }
+    },
+    {
+      "when": { "facing": "south", "type": "left" },
+      "apply": { "model": "potions_ld:block/alchemy_table_left", "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "type": "left" },
+      "apply": { "model": "potions_ld:block/alchemy_table_left", "y": 270 }
+    },
+    {
+      "when": { "facing": "north", "type": "right" },
+      "apply": { "model": "potions_ld:block/alchemy_table_right" }
+    },
+    {
+      "when": { "facing": "east", "type": "right" },
+      "apply": { "model": "potions_ld:block/alchemy_table_right", "y": 90 }
+    },
+    {
+      "when": { "facing": "south", "type": "right" },
+      "apply": { "model": "potions_ld:block/alchemy_table_right", "y": 180 }
+    },
+    {
+      "when": { "facing": "west", "type": "right" },
+      "apply": { "model": "potions_ld:block/alchemy_table_right", "y": 270 }
+    },
+    {
+      "when": { "has_speed_upgrade": "true", "type": "left", "facing": "north" },
+      "apply": { "model": "potions_ld:block/upgrade_speed" }
+    },
+    {
+      "when": { "has_speed_upgrade": "true", "type": "left", "facing": "east" },
+      "apply": { "model": "potions_ld:block/upgrade_speed", "y": 90 }
+    },
+    {
+      "when": { "has_speed_upgrade": "true", "type": "left", "facing": "south" },
+      "apply": { "model": "potions_ld:block/upgrade_speed", "y": 180 }
+    },
+    {
+      "when": { "has_speed_upgrade": "true", "type": "left", "facing": "west" },
+      "apply": { "model": "potions_ld:block/upgrade_speed", "y": 270 }
+    },
+    {
+      "when": { "has_efficiency_upgrade": "true", "type": "left", "facing": "north" },
+      "apply": { "model": "potions_ld:block/upgrade_efficiency" }
+    },
+    {
+      "when": { "has_efficiency_upgrade": "true", "type": "left", "facing": "east" },
+      "apply": { "model": "potions_ld:block/upgrade_efficiency", "y": 90 }
+    },
+    {
+      "when": { "has_efficiency_upgrade": "true", "type": "left", "facing": "south" },
+      "apply": { "model": "potions_ld:block/upgrade_efficiency", "y": 180 }
+    },
+    {
+      "when": { "has_efficiency_upgrade": "true", "type": "left", "facing": "west" },
+      "apply": { "model": "potions_ld:block/upgrade_efficiency", "y": 270 }
+    },
+    {
+      "when": { "has_fortune_upgrade": "true", "type": "left", "facing": "north" },
+      "apply": { "model": "potions_ld:block/upgrade_fortune" }
+    },
+    {
+      "when": { "has_fortune_upgrade": "true", "type": "left", "facing": "east" },
+      "apply": { "model": "potions_ld:block/upgrade_fortune", "y": 90 }
+    },
+    {
+      "when": { "has_fortune_upgrade": "true", "type": "left", "facing": "south" },
+      "apply": { "model": "potions_ld:block/upgrade_fortune", "y": 180 }
+    },
+    {
+      "when": { "has_fortune_upgrade": "true", "type": "left", "facing": "west" },
+      "apply": { "model": "potions_ld:block/upgrade_fortune", "y": 270 }
+    }
+  ]
+}
