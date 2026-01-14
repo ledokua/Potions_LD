@@ -8,6 +8,7 @@ import net.ledok.potions_ld.registry.ItemGroupRegistry;
 import net.ledok.potions_ld.registry.ItemRegistry;
 import net.ledok.potions_ld.registry.RecipeRegistry;
 import net.ledok.potions_ld.screen.ScreenHandlerTypeRegistry;
+import net.ledok.potions_ld.world.ModBiomeModifications;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +25,7 @@ public class PotionsLdMod implements ModInitializer {
         EffectRegistry.initialize();
         RecipeRegistry.initialize();
         ScreenHandlerTypeRegistry.initialize();
+        ModBiomeModifications.initialize();
         // Item Group should be last so it can find all items/blocks
         ItemGroupRegistry.initialize();
     }
