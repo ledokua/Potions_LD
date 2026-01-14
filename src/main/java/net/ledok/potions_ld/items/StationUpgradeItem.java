@@ -20,3 +20,4 @@ public class StationUpgradeItem extends Item {
         super.appendHoverText(stack, context, tooltip, type);
     }
 }
+// TODO Upgrade idea: 30% to additionally give potion one tier lower

@@ -2,35 +2,23 @@
   "multipart": [
     {
       "when": { "facing": "north", "type": "left" },
-      "apply": { "model": "potions_ld:block/alchemy_table_left" }
+      "apply": { "model": "potions_ld:block/alchemy_table_base" }
     },
     {
       "when": { "facing": "east", "type": "left" },
-      "apply": { "model": "potions_ld:block/alchemy_table_left", "y": 90 }
+      "apply": { "model": "potions_ld:block/alchemy_table_base", "y": 90 }
     },
     {
       "when": { "facing": "south", "type": "left" },
-      "apply": { "model": "potions_ld:block/alchemy_table_left", "y": 180 }
+      "apply": { "model": "potions_ld:block/alchemy_table_base", "y": 180 }
     },
     {
       "when": { "facing": "west", "type": "left" },
-      "apply": { "model": "potions_ld:block/alchemy_table_left", "y": 270 }
+      "apply": { "model": "potions_ld:block/alchemy_table_base", "y": 270 }
     },
     {
-      "when": { "facing": "north", "type": "right" },
-      "apply": { "model": "potions_ld:block/alchemy_table_right" }
-    },
-    {
-      "when": { "facing": "east", "type": "right" },
-      "apply": { "model": "potions_ld:block/alchemy_table_right", "y": 90 }
-    },
-    {
-      "when": { "facing": "south", "type": "right" },
-      "apply": { "model": "potions_ld:block/alchemy_table_right", "y": 180 }
-    },
-    {
-      "when": { "facing": "west", "type": "right" },
-      "apply": { "model": "potions_ld:block/alchemy_table_right", "y": 270 }
+      "when": { "type": "right" },
+      "apply": { "model": "potions_ld:block/empty" }
     },
     {
       "when": { "has_speed_upgrade": "true", "type": "left", "facing": "north" },
@@ -47,6 +35,22 @@
     {
       "when": { "has_speed_upgrade": "true", "type": "left", "facing": "west" },
       "apply": { "model": "potions_ld:block/upgrade_speed", "y": 270 }
+    },
+    {
+      "when": { "has_speed_upgrade": "false", "type": "left", "facing": "north" },
+      "apply": { "model": "potions_ld:block/base_cauldron" }
+    },
+    {
+      "when": { "has_speed_upgrade": "false", "type": "left", "facing": "east" },
+      "apply": { "model": "potions_ld:block/base_cauldron", "y": 90 }
+    },
+    {
+      "when": { "has_speed_upgrade": "false", "type": "left", "facing": "south" },
+      "apply": { "model": "potions_ld:block/base_cauldron", "y": 180 }
+    },
+    {
+      "when": { "has_speed_upgrade": "false", "type": "left", "facing": "west" },
+      "apply": { "model": "potions_ld:block/base_cauldron", "y": 270 }
     },
     {
       "when": { "has_efficiency_upgrade": "true", "type": "left", "facing": "north" },
