@@ -48,19 +48,19 @@ public class AlchemyTableScreenHandler extends AbstractContainerMenu {
         });
         
         // Upgrade Slots
-        this.addSlot(new Slot(inventory, 5, 152, 11) {
+        this.addSlot(new Slot(inventory, 5, 153, 8) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() instanceof StationUpgradeItem;
             }
         });
-        this.addSlot(new Slot(inventory, 6, 152, 31) {
+        this.addSlot(new Slot(inventory, 6, 153, 29) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() instanceof StationUpgradeItem;
             }
         });
-        this.addSlot(new Slot(inventory, 7, 152, 51) {
+        this.addSlot(new Slot(inventory, 7, 153, 50) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() instanceof StationUpgradeItem;

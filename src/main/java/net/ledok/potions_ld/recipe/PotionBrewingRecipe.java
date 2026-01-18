@@ -45,6 +45,11 @@ public record PotionBrewingRecipe(List<CountedIngredient> ingredients, ItemStack
     }
 
     @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
+    @Override
     public RecipeSerializer<?> getSerializer() {
         return PotionBrewingRecipeSerializer.INSTANCE;
     }
