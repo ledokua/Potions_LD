@@ -1,0 +1,34 @@
+{
+  "type": "potions_ld:potion_brewing",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "potions_ld:vitality_herb_5"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:ender_eye"
+      },
+      "count": 8
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:golden_apple"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:chorus_fruit"
+      },
+      "count": 5
+    }
+  ],
+  "result": {
+    "item": "potions_ld:healing_potion_5",
+    "count": 1
+  },
+  "cookingTime": 400
+}

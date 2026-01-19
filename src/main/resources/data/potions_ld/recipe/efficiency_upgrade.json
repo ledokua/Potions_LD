@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "minecraft:end_rod"
+    },
+    "2": {
+      "item": "minecraft:smooth_quartz"
+    },
+    "3": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    "  1",
+    "232",
+    "222"
+  ],
+  "result": {
+    "count": 1,
+    "id": "potions_ld:efficiency_upgrade"
+  }
+}

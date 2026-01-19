@@ -1,0 +1,34 @@
+{
+  "type": "potions_ld:potion_brewing",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "potions_ld:vitality_herb_1"
+      },
+      "count": 5
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:dandelion"
+      },
+      "count": 7
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:poppy"
+      },
+      "count": 9
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:short_grass"
+      },
+      "count": 12
+    }
+  ],
+  "result": {
+    "item": "potions_ld:healing_potion_1",
+    "count": 4
+  },
+  "cookingTime": 200
+}

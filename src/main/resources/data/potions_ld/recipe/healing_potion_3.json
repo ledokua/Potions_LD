@@ -1,0 +1,34 @@
+{
+  "type": "potions_ld:potion_brewing",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "potions_ld:vitality_herb_3"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:nether_wart"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:golden_carrot"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:fermented_spider_eye"
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "potions_ld:healing_potion_3",
+    "count": 1
+  },
+  "cookingTime": 350
+}

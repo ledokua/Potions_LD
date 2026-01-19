@@ -19,7 +19,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class PotionBrewingCategory implements IRecipeCategory<PotionBrewingRecipe> {
@@ -50,12 +52,12 @@ public class PotionBrewingCategory implements IRecipeCategory<PotionBrewingRecip
     }
 
     @Override
-    public RecipeType<PotionBrewingRecipe> getRecipeType() {
+    public @NotNull RecipeType<PotionBrewingRecipe> getRecipeType() {
         return RECIPE_TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.translatable("block.potions_ld.alchemy_table");
     }
 
@@ -86,6 +88,18 @@ public class PotionBrewingCategory implements IRecipeCategory<PotionBrewingRecip
     }
 
     @Override
+    @SuppressWarnings("removal")
+    public @NotNull List<Component> getTooltipStrings(PotionBrewingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        // Check if mouse is over the arrow (x: 60, y: 16, width: 25, height: 16)
+        if (mouseX >= 60 && mouseX < 60 + 25 && mouseY >= 16 && mouseY < 16 + 16) {
+            // Convert ticks to seconds (20 ticks = 1 second)
+            float seconds = recipe.cookingTime() / 20f;
+            return List.of(Component.translatable("jei.potions_ld.cooking_time", seconds));
+        }
+        return List.of();
+    }
+
+    @Override
     public void setRecipe(IRecipeLayoutBuilder builder, PotionBrewingRecipe recipe, IFocusGroup focuses) {
         List<CountedIngredient> ingredients = recipe.ingredients();
 
@@ -96,8 +110,18 @@ public class PotionBrewingCategory implements IRecipeCategory<PotionBrewingRecip
 
         for (int i = 0; i < ingredients.size() && i < 4; i++) {
             CountedIngredient ci = ingredients.get(i);
+            
+            // Convert the Ingredient to a list of ItemStacks with the correct count
+            List<ItemStack> itemStacks = Arrays.stream(ci.ingredient().getItems())
+                    .map(stack -> {
+                        ItemStack copy = stack.copy();
+                        copy.setCount(ci.count());
+                        return copy;
+                    })
+                    .toList();
+
             builder.addSlot(RecipeIngredientRole.INPUT, slots[i][0], slots[i][1])
-                    .addIngredients(ci.ingredient());
+                    .addItemStacks(itemStacks);
         }
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 96, 16)

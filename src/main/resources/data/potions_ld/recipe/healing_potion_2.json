@@ -1,0 +1,34 @@
+{
+  "type": "potions_ld:potion_brewing",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "potions_ld:vitality_herb_2"
+      },
+      "count": 5
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:lapis_lazuli"
+      },
+      "count": 12
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:redstone"
+      },
+      "count": 14
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:gold_nugget"
+      },
+      "count": 11
+    }
+  ],
+  "result": {
+    "item": "potions_ld:healing_potion_2",
+    "count": 2
+  },
+  "cookingTime": 300
+}

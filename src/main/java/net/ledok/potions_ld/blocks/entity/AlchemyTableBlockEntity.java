@@ -9,6 +9,7 @@ import net.ledok.potions_ld.recipe.PotionBrewingRecipeType;
 import net.ledok.potions_ld.screen.AlchemyTableScreenHandler;
 import net.ledok.potions_ld.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -16,6 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -31,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory {
+public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory, WorldlyContainer {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(8, ItemStack.EMPTY);
     private static final int INPUT_SLOT_1 = 0;
     private static final int INPUT_SLOT_2 = 1;
@@ -42,6 +44,10 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
     private static final int UPGRADE_SLOT_2 = 6;
     private static final int UPGRADE_SLOT_3 = 7;
     
+    private static final int[] TOP_SLOTS = {INPUT_SLOT_1, INPUT_SLOT_2, INPUT_SLOT_3, INPUT_SLOT_4};
+    private static final int[] SIDE_SLOTS = {INPUT_SLOT_1, INPUT_SLOT_2, INPUT_SLOT_3, INPUT_SLOT_4};
+    private static final int[] BOTTOM_SLOTS = {OUTPUT_SLOT};
+
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 100;
@@ -72,6 +78,35 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
                 return 2;
             }
         };
+    }
+
+    @Override
+    public int[] getSlotsForFace(Direction side) {
+        if (side == Direction.DOWN) {
+            return BOTTOM_SLOTS;
+        } else if (side == Direction.UP) {
+            return TOP_SLOTS;
+        } else {
+            return SIDE_SLOTS;
+        }
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction) {
+        // Allow inserting into input slots from top and sides
+        if (direction != Direction.DOWN) {
+            return index >= INPUT_SLOT_1 && index <= INPUT_SLOT_4;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+        // Allow extracting from output slot from bottom
+        if (direction == Direction.DOWN) {
+            return index == OUTPUT_SLOT;
+        }
+        return false;
     }
 
     @Override

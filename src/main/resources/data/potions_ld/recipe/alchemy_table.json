@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "1": {
+      "item": "minecraft:lantern"
+    },
+    "2": {
+      "item": "minecraft:magma_block"
+    },
+    "3": {
+      "item": "minecraft:book"
+    },
+    "4": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "5": {
+      "item": "minecraft:stone_pressure_plate"
+    },
+    "6": {
+      "tag": "minecraft:fence_gates"
+    },
+    "7": {
+      "tag": "minecraft:logs_that_burn"
+    }
+  },
+  "pattern": [
+    "123",
+    "454",
+    "6 7"
+  ],
+  "result": {
+    "count": 1,
+    "id": "potions_ld:alchemy_table"
+  }
+}

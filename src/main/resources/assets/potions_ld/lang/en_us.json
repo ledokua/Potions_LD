@@ -36,5 +36,6 @@
   "itemGroup.potions_ld.potions_ld_group": "Potions LD",
   "effect.potions_ld.potion_sickness": "Potion Sickness",
   "effect.potions_ld.potion_sickness.description": "Reduces healing from potions by 5% per level.",
-  "block.potions_ld.alchemy_table": "Alchemy Table"
+  "block.potions_ld.alchemy_table": "Alchemy Table",
+  "jei.potions_ld.cooking_time": "Time: %s s"
 }

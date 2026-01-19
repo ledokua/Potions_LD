@@ -1,0 +1,34 @@
+{
+  "type": "potions_ld:potion_brewing",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "potions_ld:vitality_herb_5"
+      },
+      "count": 20
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:enchanted_golden_apple"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:poisonous_potato"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:echo_shard"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "potions_ld:healing_potion_6",
+    "count": 1
+  },
+  "cookingTime": 1000
+}

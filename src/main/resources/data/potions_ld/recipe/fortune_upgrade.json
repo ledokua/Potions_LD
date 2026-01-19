@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "minecraft:copper_grate"
+    },
+    "2": {
+      "item": "minecraft:experience_bottle"
+    },
+    "3": {
+      "tag": "minecraft:candles"
+    },
+    "4": {
+      "item": "minecraft:waxed_exposed_cut_copper_slab"
+    }
+  },
+  "pattern": [
+    "12 ",
+    "13 ",
+    "444"
+  ],
+  "result": {
+    "count": 1,
+    "id": "potions_ld:fortune_upgrade"
+  }
+}

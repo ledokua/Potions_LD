@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "tag": "minecraft:fences"
+    },
+    "2": {
+      "item": "minecraft:smooth_basalt"
+    },
+    "3": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "pattern": [
+    "1 1",
+    "232",
+    "222"
+  ],
+  "result": {
+    "count": 1,
+    "id": "potions_ld:speed_upgrade"
+  }
+}

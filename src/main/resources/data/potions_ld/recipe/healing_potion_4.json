@@ -1,0 +1,34 @@
+{
+  "type": "potions_ld:potion_brewing",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "potions_ld:vitality_herb_4"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:honey_bottle"
+      },
+      "count": 6
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:amethyst_shard"
+      },
+      "count": 6
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:crimson_fungus"
+      },
+      "count": 6
+    }
+  ],
+  "result": {
+    "item": "potions_ld:healing_potion_4",
+    "count": 1
+  },
+  "cookingTime": 350
+}
