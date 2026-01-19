@@ -18,6 +18,9 @@
     ],
     "main": [
       "net.ledok.potions_ld.PotionsLdMod"
+    ],
+    "jei_mod_plugin": [
+      "net.ledok.potions_ld.compat.jei.PotionsLdJeiPlugin"
     ]
   },
   "mixins": [

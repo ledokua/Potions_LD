@@ -33,11 +33,11 @@ public class AlchemyTableScreenHandler extends AbstractContainerMenu {
         inventory.startOpen(playerInventory.player);
         addDataSlots(data);
 
-        // Input Slots (2x2 grid)
-        this.addSlot(new Slot(inventory, 0, 30, 22));
-        this.addSlot(new Slot(inventory, 1, 48, 22));
-        this.addSlot(new Slot(inventory, 2, 30, 40));
-        this.addSlot(new Slot(inventory, 3, 48, 40));
+        // Input Slots
+        this.addSlot(new Slot(inventory, 0, 29, 21));
+        this.addSlot(new Slot(inventory, 1, 47, 21));
+        this.addSlot(new Slot(inventory, 2, 29, 40));
+        this.addSlot(new Slot(inventory, 3, 47, 40));
         
         // Output Slot
         this.addSlot(new Slot(inventory, OUTPUT_SLOT, 116, 31) {
