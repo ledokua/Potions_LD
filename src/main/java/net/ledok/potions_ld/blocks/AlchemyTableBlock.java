@@ -53,10 +53,8 @@ public class AlchemyTableBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        if (state.getValue(CHEST_TYPE) == ChestType.LEFT) {
-            return new AlchemyTableBlockEntity(pos, state);
-        }
-        return null;
+        // Create block entity for both parts so hoppers can connect to either
+        return new AlchemyTableBlockEntity(pos, state);
     }
 
     @Nullable

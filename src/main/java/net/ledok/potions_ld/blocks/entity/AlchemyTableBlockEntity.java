@@ -28,6 +28,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.ChestType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -80,8 +81,25 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
         };
     }
 
+    private AlchemyTableBlockEntity getMainPart() {
+        if (this.level == null) return this;
+        BlockState state = this.getBlockState();
+        if (state.getValue(AlchemyTableBlock.CHEST_TYPE) == ChestType.RIGHT) {
+            Direction facing = state.getValue(AlchemyTableBlock.FACING);
+            BlockPos mainPos = this.worldPosition.relative(facing.getCounterClockWise());
+            BlockEntity be = this.level.getBlockEntity(mainPos);
+            if (be instanceof AlchemyTableBlockEntity mainBe) {
+                return mainBe;
+            }
+        }
+        return this;
+    }
+
     @Override
     public int[] getSlotsForFace(Direction side) {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) return main.getSlotsForFace(side);
+
         if (side == Direction.DOWN) {
             return BOTTOM_SLOTS;
         } else if (side == Direction.UP) {
@@ -93,7 +111,9 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction) {
-        // Allow inserting into input slots from top and sides
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) return main.canPlaceItemThroughFace(index, itemStack, direction);
+
         if (direction != Direction.DOWN) {
             return index >= INPUT_SLOT_1 && index <= INPUT_SLOT_4;
         }
@@ -102,7 +122,9 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-        // Allow extracting from output slot from bottom
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) return main.canTakeItemThroughFace(index, stack, direction);
+
         if (direction == Direction.DOWN) {
             return index == OUTPUT_SLOT;
         }
@@ -111,6 +133,11 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public void setChanged() {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) {
+            main.setChanged();
+            return;
+        }
         updateBlockState();
         super.setChanged();
     }
@@ -135,16 +162,64 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public NonNullList<ItemStack> getItems() {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) return main.getItems();
         return inventory;
     }
 
     @Override
     public @NotNull ItemStack getItem(int slot) {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) return main.getItem(slot);
         return ImplementedInventory.super.getItem(slot);
     }
 
     @Override
+    public void setItem(int slot, ItemStack stack) {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) {
+            main.setItem(slot, stack);
+            return;
+        }
+        ImplementedInventory.super.setItem(slot, stack);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) return main.isEmpty();
+        return ImplementedInventory.super.isEmpty();
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int count) {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) return main.removeItem(slot, count);
+        return ImplementedInventory.super.removeItem(slot, count);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) return main.removeItemNoUpdate(slot);
+        return ImplementedInventory.super.removeItemNoUpdate(slot);
+    }
+
+    @Override
+    public void clearContent() {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) {
+            main.clearContent();
+            return;
+        }
+        ImplementedInventory.super.clearContent();
+    }
+
+    @Override
     public boolean canPlaceItem(int slot, ItemStack stack) {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) return main.canPlaceItem(slot, stack);
+
         if (slot >= INPUT_SLOT_1 && slot <= INPUT_SLOT_4) {
             return true;
         } else if (slot == OUTPUT_SLOT) {
@@ -172,16 +247,21 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory playerInventory, Player player) {
+        AlchemyTableBlockEntity main = getMainPart();
+        if (main != this) return main.createMenu(syncId, playerInventory, player);
         return new AlchemyTableScreenHandler(syncId, playerInventory, this, this.data);
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        ContainerHelper.saveAllItems(tag, inventory, registries);
-        tag.putInt("alchemy_table.progress", progress);
-        if (activeRecipe != null) {
-            tag.putString("alchemy_table.active_recipe", activeRecipe.id().toString());
+        // Only save inventory if we are the main part
+        if (this.getBlockState().getValue(AlchemyTableBlock.CHEST_TYPE) == ChestType.LEFT) {
+            ContainerHelper.saveAllItems(tag, inventory, registries);
+            tag.putInt("alchemy_table.progress", progress);
+            if (activeRecipe != null) {
+                tag.putString("alchemy_table.active_recipe", activeRecipe.id().toString());
+            }
         }
     }
 
@@ -189,20 +269,28 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
     @SuppressWarnings("unchecked")
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        ContainerHelper.loadAllItems(tag, inventory, registries);
-        progress = tag.getInt("alchemy_table.progress");
-        if (tag.contains("alchemy_table.active_recipe") && this.level != null) {
-            ResourceLocation recipeId = ResourceLocation.parse(tag.getString("alchemy_table.active_recipe"));
-            this.level.getRecipeManager().byKey(recipeId).ifPresent(recipe -> {
-                if (recipe.value() instanceof PotionBrewingRecipe) {
-                    this.activeRecipe = (RecipeHolder<PotionBrewingRecipe>) recipe;
-                }
-            });
+        // Only load inventory if we are the main part
+        if (this.getBlockState().getValue(AlchemyTableBlock.CHEST_TYPE) == ChestType.LEFT) {
+            ContainerHelper.loadAllItems(tag, inventory, registries);
+            progress = tag.getInt("alchemy_table.progress");
+            if (tag.contains("alchemy_table.active_recipe") && this.level != null) {
+                ResourceLocation recipeId = ResourceLocation.parse(tag.getString("alchemy_table.active_recipe"));
+                this.level.getRecipeManager().byKey(recipeId).ifPresent(recipe -> {
+                    if (recipe.value() instanceof PotionBrewingRecipe) {
+                        this.activeRecipe = (RecipeHolder<PotionBrewingRecipe>) recipe;
+                    }
+                });
+            }
         }
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, AlchemyTableBlockEntity entity) {
         if (level == null || level.isClientSide) {
+            return;
+        }
+        
+        // Double check we are the main part, though the block ticker should handle this
+        if (state.getValue(AlchemyTableBlock.CHEST_TYPE) != ChestType.LEFT) {
             return;
         }
 
