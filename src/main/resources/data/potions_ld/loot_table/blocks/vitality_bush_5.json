@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "potions_ld:vitality_seed_5"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "potions_ld:vitality_herb_5"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "potions_ld:vitality_bush_5",
+          "properties": {
+            "age": "6"
+          }
+        }
+      ]
+    }
+  ]
+}
