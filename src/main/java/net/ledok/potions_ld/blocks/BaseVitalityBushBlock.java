@@ -21,11 +21,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public abstract class BaseVitalityBushBlock extends BushBlock {
@@ -114,5 +118,25 @@ public abstract class BaseVitalityBushBlock extends BushBlock {
                  }
             }
         }
+    }
+
+    protected void performHarvest(BlockState state, Level level, BlockPos pos, Player player) {
+        if (level instanceof ServerLevel serverLevel) {
+            LootParams.Builder params = new LootParams.Builder(serverLevel)
+                    .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
+                    .withParameter(LootContextParams.BLOCK_STATE, state)
+                    .withOptionalParameter(LootContextParams.THIS_ENTITY, player)
+                    .withParameter(LootContextParams.TOOL, ItemStack.EMPTY);
+
+            List<ItemStack> drops = state.getDrops(params);
+            for (ItemStack drop : drops) {
+                popResource(level, pos, drop);
+            }
+        }
+
+        level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+        BlockState newState = state.setValue(getAgeProperty(), getHarvestResetAge());
+        level.setBlock(pos, newState, 2);
+        level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, newState));
     }
 }

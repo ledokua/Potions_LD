@@ -6,7 +6,55 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "potions_ld:vitality_seed_2"
+          "name": "potions_ld:vitality_seed_2",
+          "conditions": [
+            {
+              "condition": "minecraft:any_of",
+              "terms": [
+                { "condition": "minecraft:block_state_property", "block": "potions_ld:vitality_bush_2", "properties": { "age": "0" } },
+                { "condition": "minecraft:block_state_property", "block": "potions_ld:vitality_bush_2", "properties": { "age": "1" } },
+                { "condition": "minecraft:block_state_property", "block": "potions_ld:vitality_bush_2", "properties": { "age": "2" } }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "potions_ld:vitality_seed_2",
+          "conditions": [
+            {
+              "condition": "minecraft:any_of",
+              "terms": [
+                { "condition": "minecraft:block_state_property", "block": "potions_ld:vitality_bush_2", "properties": { "age": "3" } },
+                { "condition": "minecraft:block_state_property", "block": "potions_ld:vitality_bush_2", "properties": { "age": "4" } }
+              ]
+            },
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.05
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "potions_ld:vitality_herb_2",
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 1, "max": 2 } }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:any_of",
+          "terms": [
+            { "condition": "minecraft:block_state_property", "block": "potions_ld:vitality_bush_2", "properties": { "age": "3" } },
+            { "condition": "minecraft:block_state_property", "block": "potions_ld:vitality_bush_2", "properties": { "age": "4" } }
+          ]
         }
       ]
     },
@@ -22,9 +70,27 @@
         {
           "condition": "minecraft:block_state_property",
           "block": "potions_ld:vitality_bush_2",
-          "properties": {
-            "age": "3"
-          }
+          "properties": { "age": "4" }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "potions_ld:vitality_seed_3"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "potions_ld:vitality_bush_2",
+          "properties": { "age": "4" }
+        },
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.01
         }
       ]
     }
