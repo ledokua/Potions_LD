@@ -26,7 +26,7 @@ public class PotionsLdMod implements ModInitializer {
         RecipeRegistry.initialize();
         ScreenHandlerTypeRegistry.initialize();
         ModBiomeModifications.initialize();
-        // Item Group should be last so it can find all items/blocks
+
         ItemGroupRegistry.initialize();
     }
 }

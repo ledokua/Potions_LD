@@ -3,6 +3,7 @@ package net.ledok.potions_ld.world;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.ledok.potions_ld.PotionsLdMod;
+import net.ledok.potions_ld.util.ModTags;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biomes;
@@ -17,7 +18,7 @@ public class ModBiomeModifications {
 
     public static void initialize() {
         BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(Biomes.DARK_FOREST),
+                BiomeSelectors.tag(ModTags.Biomes.HAS_VITALITY_BUSH),
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 VITALITY_BUSH_PLACED_KEY
         );
