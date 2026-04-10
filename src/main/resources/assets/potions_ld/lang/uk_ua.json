@@ -1,0 +1,38 @@
+{
+  "message.potions_ld.healing_potion_used": "Ви відчуваєте себе краще!",
+
+  "item.potions_ld.healing_potion_1": "Мале Зілля Лікування",
+  "item.potions_ld.healing_potion_2": "Стандартне Зілля Лікування",
+  "item.potions_ld.healing_potion_3": "Велике Зілля Лікування",
+  "item.potions_ld.healing_potion_4": "Вище Зілля Лікування",
+  "item.potions_ld.healing_potion_5": "Грандіозне Зілля Лікування",
+  "item.potions_ld.healing_potion_6": "Зілля Повного Відновлення",
+
+  "item.potions_ld.vitality_seed_1": "Насіння Життєвої Сили 1-го Рівня",
+  "item.potions_ld.vitality_herb_1": "Трава Життєвої Сили 1-го Рівня",
+  "item.potions_ld.vitality_seed_2": "Насіння Життєвої Сили 2-го Рівня",
+  "item.potions_ld.vitality_herb_2": "Трава Життєвої Сили 2-го Рівня",
+  "item.potions_ld.vitality_seed_3": "Насіння Життєвої Сили 3-го Рівня",
+  "item.potions_ld.vitality_herb_3": "Трава Життєвої Сили 3-го Рівня",
+  "item.potions_ld.vitality_seed_4": "Насіння Життєвої Сили 4-го Рівня",
+  "item.potions_ld.vitality_herb_4": "Трава Життєвої Сили 4-го Рівня",
+  "item.potions_ld.vitality_seed_5": "Насіння Життєвої Сили 5-го Рівня",
+  "item.potions_ld.vitality_herb_5": "Трава Життєвої Сили 5-го Рівня",
+
+  "item.potions_ld.speed_upgrade": "Покращення Швидкості",
+  "item.potions_ld.speed_upgrade.tooltip": "Зменшує час виробництва на 30%",
+  "item.potions_ld.efficiency_upgrade": "Покращення Ефективності",
+  "item.potions_ld.efficiency_upgrade.tooltip": "Зменшує споживання матеріалів на 50%",
+  "item.potions_ld.fortune_upgrade": "Покращення Удачі",
+  "item.potions_ld.fortune_upgrade.tooltip": "10% шанс на додатковий вихід",
+
+  "item.potions_ld.healing_potion.tooltip.heal": "Лікує на: %1$s",
+  "item.potions_ld.healing_potion.tooltip.use_time": "Час використання: %1$s секунд",
+  "item.potions_ld.healing_potion.tooltip.sickness": "Нудота: %1$s секунд",
+
+  "itemGroup.potions_ld.potions_ld_group": "Зілля ЛД",
+  "effect.potions_ld.potion_sickness": "Нудота від Зілля",
+  "effect.potions_ld.potion_sickness.description": "Зменшує лікування від зілля на 5% за рівень.",
+  "block.potions_ld.alchemy_table": "Алхімічний Стіл",
+  "jei.potions_ld.cooking_time": "Час: %s с"
+}
