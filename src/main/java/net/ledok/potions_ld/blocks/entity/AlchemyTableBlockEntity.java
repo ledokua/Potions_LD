@@ -1,6 +1,7 @@
 package net.ledok.potions_ld.blocks.entity;
 
 import net.ledok.potions_ld.blocks.AlchemyTableBlock;
+import net.ledok.potions_ld.config.PotionsLdConfig;
 import net.ledok.potions_ld.items.StationUpgradeItem;
 import net.ledok.potions_ld.registry.ItemRegistry;
 import net.ledok.potions_ld.recipe.CountedIngredient;
@@ -12,6 +13,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -239,6 +244,15 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
         return false;
     }
 
+    /** Ingredient count required after applying the Efficiency upgrade (if present). */
+    private int getRequiredCount(CountedIngredient ingredient) {
+        int count = ingredient.count();
+        if (hasUpgrade(ItemRegistry.EFFICIENCY_UPGRADE)) {
+            count = Math.max(1, Math.round(count * PotionsLdConfig.get().efficiencyCostMultiplier));
+        }
+        return count;
+    }
+
     @Override
     public @NotNull Component getDisplayName() {
         return Component.translatable("block.potions_ld.alchemy_table");
@@ -259,6 +273,7 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
         if (this.getBlockState().getValue(AlchemyTableBlock.CHEST_TYPE) == ChestType.LEFT) {
             ContainerHelper.saveAllItems(tag, inventory, registries);
             tag.putInt("alchemy_table.progress", progress);
+            tag.putInt("alchemy_table.max_progress", maxProgress);
             if (activeRecipe != null) {
                 tag.putString("alchemy_table.active_recipe", activeRecipe.id().toString());
             }
@@ -273,6 +288,9 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
         if (this.getBlockState().getValue(AlchemyTableBlock.CHEST_TYPE) == ChestType.LEFT) {
             ContainerHelper.loadAllItems(tag, inventory, registries);
             progress = tag.getInt("alchemy_table.progress");
+            if (tag.contains("alchemy_table.max_progress")) {
+                maxProgress = tag.getInt("alchemy_table.max_progress");
+            }
             if (tag.contains("alchemy_table.active_recipe") && this.level != null) {
                 ResourceLocation recipeId = ResourceLocation.parse(tag.getString("alchemy_table.active_recipe"));
                 this.level.getRecipeManager().byKey(recipeId).ifPresent(recipe -> {
@@ -300,6 +318,9 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
                 setChanged(level, pos, state);
                 return;
             }
+            if (level instanceof ServerLevel serverLevel) {
+                spawnBrewingEffects(serverLevel, pos);
+            }
             entity.progress++;
             if (entity.progress >= entity.maxProgress) {
                 craftItem(entity, entity.activeRecipe);
@@ -314,7 +335,7 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
                 
                 int baseTime = entity.activeRecipe.value().cookingTime();
                 if (entity.hasUpgrade(ItemRegistry.SPEED_UPGRADE)) {
-                    entity.maxProgress = Math.max(1, Math.round(baseTime * 0.7f));
+                    entity.maxProgress = Math.max(1, Math.round(baseTime * PotionsLdConfig.get().speedTimeMultiplier));
                 } else {
                     entity.maxProgress = baseTime;
                 }
@@ -326,6 +347,22 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
     private void resetProgress() {
         this.progress = 0;
         this.activeRecipe = null;
+    }
+
+    /** Ambient bubbling particles and an occasional brew sound while a craft is in progress. */
+    private static void spawnBrewingEffects(ServerLevel level, BlockPos pos) {
+        long time = level.getGameTime();
+        double x = pos.getX() + 0.5;
+        double y = pos.getY() + 0.9;
+        double z = pos.getZ() + 0.5;
+
+        if (time % 4 == 0) {
+            level.sendParticles(ParticleTypes.BUBBLE_POP, x, y, z, 2, 0.18, 0.05, 0.18, 0.0);
+            level.sendParticles(ParticleTypes.SPLASH, x, y, z, 1, 0.15, 0.0, 0.15, 0.0);
+        }
+        if (time % 40 == 0) {
+            level.playSound(null, pos, SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 0.4f, 1.0f);
+        }
     }
 
     private static Optional<RecipeHolder<PotionBrewingRecipe>> findRecipe(AlchemyTableBlockEntity entity) {
@@ -345,10 +382,7 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
         }
 
         for (CountedIngredient countedIngredient : recipe.ingredients()) {
-            int requiredCount = countedIngredient.count();
-            if (entity.hasUpgrade(ItemRegistry.EFFICIENCY_UPGRADE)) {
-                requiredCount = Math.max(1, Math.round(requiredCount * 0.5f));
-            }
+            int requiredCount = entity.getRequiredCount(countedIngredient);
 
             boolean satisfied = false;
             for (ItemStack stackInSlot : availableItems) {
@@ -385,11 +419,8 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
 
     private static void consumeIngredients(AlchemyTableBlockEntity entity, RecipeHolder<PotionBrewingRecipe> recipe) {
         for (CountedIngredient countedIngredient : recipe.value().ingredients()) {
-            int ingredientCost = countedIngredient.count();
-            if (entity.hasUpgrade(ItemRegistry.EFFICIENCY_UPGRADE)) {
-                ingredientCost = Math.max(1, Math.round(ingredientCost * 0.5f));
-            }
-            
+            int ingredientCost = entity.getRequiredCount(countedIngredient);
+
             for (int i = INPUT_SLOT_1; i <= INPUT_SLOT_4; i++) {
                 ItemStack stackInSlot = entity.getItem(i);
                 if (countedIngredient.ingredient().test(stackInSlot)) {
@@ -408,15 +439,19 @@ public class AlchemyTableBlockEntity extends BlockEntity implements MenuProvider
         if (entity.level == null) return;
         ItemStack resultItem = recipe.value().getResultItem(entity.level.registryAccess());
         int outputAmount = resultItem.getCount();
-        if (entity.hasUpgrade(ItemRegistry.FORTUNE_UPGRADE) && entity.level.random.nextFloat() < 0.1f) {
-            outputAmount++;
+        if (entity.hasUpgrade(ItemRegistry.FORTUNE_UPGRADE) && entity.level.random.nextFloat() < PotionsLdConfig.get().fortuneChance) {
+            outputAmount += PotionsLdConfig.get().fortuneBonus;
         }
-        
+
         ItemStack outputStack = entity.getItem(OUTPUT_SLOT);
         if (outputStack.isEmpty()) {
-            entity.setItem(OUTPUT_SLOT, new ItemStack(resultItem.getItem(), outputAmount));
+            // Clamp so a Fortune bonus can never exceed the stack limit.
+            int placed = Math.min(outputAmount, resultItem.getMaxStackSize());
+            entity.setItem(OUTPUT_SLOT, new ItemStack(resultItem.getItem(), placed));
         } else {
-            outputStack.grow(outputAmount);
+            // canCraft() guarantees room for the base output; clamp the Fortune bonus to the remaining space.
+            int room = outputStack.getMaxStackSize() - outputStack.getCount();
+            outputStack.grow(Math.min(outputAmount, room));
         }
     }
 }

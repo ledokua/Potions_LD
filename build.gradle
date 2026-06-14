@@ -28,6 +28,11 @@ repositories {
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
+    maven {
+        // location of the maven that hosts EMI files
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/releases/"
+    }
 }
 
 dependencies {
@@ -42,6 +47,10 @@ dependencies {
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}")
     // at runtime, use the full JEI jar for Fabric
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
+
+    // compile against the EMI API, use the full jar at runtime
+    modCompileOnly("dev.emi:emi-fabric:${emi_version}:api")
+    modRuntimeOnly("dev.emi:emi-fabric:${emi_version}")
 }
 
 processResources {

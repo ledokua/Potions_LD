@@ -1,0 +1,16 @@
+{
+  "type": "potions_ld:potion_brewing",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "potions_ld:vitality_herb_3"
+      },
+      "count": 12
+    }
+  ],
+  "result": {
+    "item": "potions_ld:vitality_seed_4",
+    "count": 1
+  },
+  "cookingTime": 800
+}

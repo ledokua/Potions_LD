@@ -26,9 +26,6 @@
   "item.potions_ld.fortune_upgrade": "Fortune Upgrade",
   "item.potions_ld.fortune_upgrade.tooltip": "10% chance for extra output",
 
-  "item.potions_ld.healing_potion.tooltip.reset_scroll": "Resets your skill tree (You don't loose points)",
-  "item.potions_ld.healing_potion.tooltip.dripstone": "Creates pointed dripstone above random player",
-  "item.potions_ld.healing_potion.tooltip": "Heals for: %1$s\nUse Time: %2$s seconds\nCooldown: %3$s seconds",
   "item.potions_ld.healing_potion.tooltip.heal": "Heals for: %1$s",
   "item.potions_ld.healing_potion.tooltip.use_time": "Use Time: %1$s seconds",
   "item.potions_ld.healing_potion.tooltip.sickness": "Sickness: %1$s seconds",
@@ -36,6 +33,14 @@
   "itemGroup.potions_ld.potions_ld_group": "Potions LD",
   "effect.potions_ld.potion_sickness": "Potion Sickness",
   "effect.potions_ld.potion_sickness.description": "Reduces healing from potions by 5% per level.",
+
   "block.potions_ld.alchemy_table": "Alchemy Table",
-  "jei.potions_ld.cooking_time": "Time: %s s"
+  "block.potions_ld.vitality_bush_1": "Tier 1 Vitality Bush",
+  "block.potions_ld.vitality_bush_2": "Tier 2 Vitality Bush",
+  "block.potions_ld.vitality_bush_3": "Tier 3 Vitality Bush",
+  "block.potions_ld.vitality_bush_4": "Tier 4 Vitality Bush",
+  "block.potions_ld.vitality_bush_5": "Tier 5 Vitality Bush",
+
+  "jei.potions_ld.cooking_time": "Time: %s s",
+  "emi.category.potions_ld.potion_brewing": "Alchemy Table"
 }

@@ -33,6 +33,14 @@
   "itemGroup.potions_ld.potions_ld_group": "Зілля ЛД",
   "effect.potions_ld.potion_sickness": "Нудота від Зілля",
   "effect.potions_ld.potion_sickness.description": "Зменшує лікування від зілля на 5% за рівень.",
+
   "block.potions_ld.alchemy_table": "Алхімічний Стіл",
-  "jei.potions_ld.cooking_time": "Час: %s с"
+  "block.potions_ld.vitality_bush_1": "Кущ Життєвої Сили 1-го Рівня",
+  "block.potions_ld.vitality_bush_2": "Кущ Життєвої Сили 2-го Рівня",
+  "block.potions_ld.vitality_bush_3": "Кущ Життєвої Сили 3-го Рівня",
+  "block.potions_ld.vitality_bush_4": "Кущ Життєвої Сили 4-го Рівня",
+  "block.potions_ld.vitality_bush_5": "Кущ Життєвої Сили 5-го Рівня",
+
+  "jei.potions_ld.cooking_time": "Час: %s с",
+  "emi.category.potions_ld.potion_brewing": "Алхімічний Стіл"
 }

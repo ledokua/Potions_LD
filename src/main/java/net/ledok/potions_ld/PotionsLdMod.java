@@ -2,6 +2,7 @@ package net.ledok.potions_ld;
 
 import net.fabricmc.api.ModInitializer;
 import net.ledok.potions_ld.blocks.entity.BlockEntityTypeRegistry;
+import net.ledok.potions_ld.config.PotionsLdConfig;
 import net.ledok.potions_ld.registry.BlockRegistry;
 import net.ledok.potions_ld.registry.EffectRegistry;
 import net.ledok.potions_ld.registry.ItemGroupRegistry;
@@ -18,6 +19,8 @@ public class PotionsLdMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        PotionsLdConfig.load();
+
         // Items must be registered before blocks that use them
         ItemRegistry.initialize();
         BlockRegistry.initialize();

@@ -21,6 +21,9 @@
     ],
     "jei_mod_plugin": [
       "net.ledok.potions_ld.compat.jei.PotionsLdJeiPlugin"
+    ],
+    "emi": [
+      "net.ledok.potions_ld.compat.emi.PotionsLdEmiPlugin"
     ]
   },
   "mixins": [

@@ -72,26 +72,6 @@
           "properties": { "age": "3" }
         }
       ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "potions_ld:vitality_seed_2"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "potions_ld:vitality_bush_1",
-          "properties": { "age": "3" }
-        },
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.01
-        }
-      ]
     }
   ]
 }

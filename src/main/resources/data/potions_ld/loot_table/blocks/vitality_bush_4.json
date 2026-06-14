@@ -44,28 +44,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "potions_ld:vitality_seed_5"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "potions_ld:vitality_bush_4",
-          "properties": {
-            "age": "6"
-          }
-        },
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.01
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
           "name": "potions_ld:vitality_herb_1",
           "functions": [ { "function": "minecraft:set_count", "count": { "min": 2, "max": 6 } } ],
           "conditions": [
