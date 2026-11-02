@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 public class BlockRegistry {
 
     public static final Block ALCHEMY_TABLE = registerBlock("alchemy_table",
-            new AlchemyTableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)));
+            new AlchemyTableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE).noOcclusion()));
 
     // Tier 1 Crop
     public static final Block VITALITY_BUSH_1 = registerBlockWithoutItem("vitality_bush_1",
